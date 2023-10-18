@@ -2,22 +2,22 @@
 
 Exercises to obtain a foundational knowledge of c++ programming. From Julio to Q
 
-##Exercise 1
+## Exercise 1
 
-###Implement Data Structure: Linked List
+### Implement Data Structure: Linked List
 
-####Tasks
+#### Tasks
 * Create Linked List
 * Insert Node: Front, back. or middle
 * Add data to list
 * Remove node from list: first, last or index
 * Implement a search operation: Give data and return position of data in list
 
-##Exercise 2
+## Exercise 2
 
-###Matric Multiplication
+### Matrix Multiplication
 
-####Tasks
+#### Tasks
 * Fill with random values (FP32)
 * Reference calculations with library
 * Can use mkl or blas or cublas
