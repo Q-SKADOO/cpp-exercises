@@ -1,4 +1,4 @@
-
+```cpp
 void deleteNode(Node** head, int position)
 {
     Node* temp;
@@ -72,4 +72,4 @@ Node* removeFirstNode(struct Node* head)
 
     return head;
 }
-
+```
