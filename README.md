@@ -1,6 +1,6 @@
 # cpp-exercises
 
-Exercises to obtain a foundational knowledge of c++ programming. From Julio to Q
+Exercises as a beginning step to obtaining a foundational knowledge of c++ programming. From Julio to Q
 
 ## Exercise 1
 
