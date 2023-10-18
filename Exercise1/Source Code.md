@@ -118,7 +118,7 @@ Node* removeFirstNode(struct Node* head)
 
 
 /* Checks whether the value x is present in linked list */
-/*bool*/ std::tuple<bool, int> search(Node* head, int x)
+/*bool*/ std::tuple<bool, int> search(Node* head, int x) //Using a tuple in order to return two values in a sense
 {
     Node* current = head; // Initialize current
     int count = 0;
@@ -126,7 +126,7 @@ Node* removeFirstNode(struct Node* head)
         count++;
         if (current->data == x)
 
-            return make_tuple(true, count);
+            return make_tuple(true, count); // used make_tuple to not only grab if true but to also grab the position while we are here
         current = current->next;
     }
     return make_tuple(false, 0);
@@ -172,18 +172,18 @@ int main()
     //Function Calls
     //
     //
-    /*Removes first node
-     *
-    removeFirstNode(head);
-     */
+    //Removes first node
+
+    //head = removeFirstNode(head);
+
 
     /* Removes last node
-     *
-    removeLastNode(head);
+
+    head = removeLastNode(head);
     */
 
     /* Removes node in certain position
-     *
+
     deleteNode(head, 2);
     */
 
@@ -195,7 +195,7 @@ int main()
     bool found;
     int position;
     std::tie(found, position) = search(head, x);
-    cout << boolalpha << "\n If found and position: " << found << ":" << position << "\n" << endl;
+    cout << boolalpha << "\n If found and position: " << found << ":" << position << "\n" << endl; // boolalpha allows for the bool value in the tuple to print as true or false
 
 
     /* Count # of nodes */
