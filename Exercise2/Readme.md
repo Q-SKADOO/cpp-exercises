@@ -15,3 +15,10 @@ Square Matrix Multiplication
 
 ![image](https://github.com/Q-SKADOO/cpp-exercises/assets/112571800/bcc31ad2-3237-46e1-892e-f7dd9ebc2b5a)
 
+
+Thoughts:
+* Have user enter the size of the matrix
+* Random number generator to fill the matrices
+* Print the two matrices
+* Print the final product
+* Implement timing
