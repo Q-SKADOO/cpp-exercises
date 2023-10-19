@@ -13,4 +13,5 @@
 
 Square Matrix Multiplication
 
-https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.quora.com%2FHow-do-you-square-a-matrix&psig=AOvVaw23F62j7gTZhd8jxnagAIKH&ust=1697814307868000&source=images&cd=vfe&opi=89978449&ved=0CA4QjRxqFwoTCMDM0cGxgoIDFQAAAAAdAAAAABAD?raw=true
+![image](https://github.com/Q-SKADOO/cpp-exercises/assets/112571800/bcc31ad2-3237-46e1-892e-f7dd9ebc2b5a)
+
