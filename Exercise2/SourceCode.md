@@ -33,6 +33,7 @@ int main()
     // Providing a seed value - Commented out for testing purposes (Consistent numbers without seed)
         /* srand((unsigned) time(NULL)); */
 
+    //Populating matrix A
     for(i = 0; i < r1; ++i)
         for(j = 0; j < c1; ++j)
         {
@@ -42,8 +43,10 @@ int main()
             a[i][j]= random, random2;
             cout << "a" << i << j << ": " << a[i][j] << "\t";
         }
+
     cout << "\n";
 
+    //Populating Matrix B
     for(i = 0; i < r1; ++i)
         for(j = 0; j < c1; ++j)
         {
@@ -53,7 +56,7 @@ int main()
             cout << "b" << i << j << ": " << b[i][j] << "\t";
         }
 
-    // Function call
+    // Matrix Multiplication
     cout << "\nMultiplication of given two matrices is:\n";
 
 
