@@ -22,3 +22,6 @@ Thoughts:
 * Print the two matrices
 * Print the final product
 * Implement timing
+
+##Source Code V1: Things learned
+* The current way that the double array is create takes up space on the stack which leads to seg faults
