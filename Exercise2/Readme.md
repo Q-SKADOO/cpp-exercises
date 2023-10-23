@@ -23,18 +23,18 @@ Thoughts:
 * Print the final product
 * Implement timing
 
-##Source Code V1: Things learned
+## Source Code V1: Things learned
 * The current way that the double array is create takes up space on the stack which leads to seg faults. Works fine for smaller sizes but blows up for larger dimensions. long a[10][10], b[10][10] is initialized just inside of main()
 * This is due to the variables being stored on what is called the "stack". There is another called "heap".
 * Note for Q: Refer to the udemy lesson on memory allocation then come back to update this section.
 
-##Source Code V2: Things learned
+## Source Code V2: Things learned
 * Now the double arrays are initialized globally before main(): long matrix_a[MAXDIM][MAXDIM], matrix_b[MAXDIM][MAXDIM];
 * The size of the matrices are defined before main as well using a define directive: #define MAXDIM 1000
 * Thought: Online i've seen people mention cache misses depending on which loop is nested i vs j
 * Also "It is well known that j-k-i loop nest is optimal in this situation. " Needs personal investigating to determine current loop structure vs "optimal" then performance evaluation
 
-###To do 10/23
+### To do 10/23
 * Understand memory allocation strategies i.e. stack vs heap then discuss in readMe
 * Investigate j-k-i loop construct
 * Create script to record dimension size vs time of execution
