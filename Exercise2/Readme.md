@@ -35,9 +35,15 @@ Thoughts:
 * Also "It is well known that j-k-i loop nest is optimal in this situation. " Needs personal investigating to determine current loop structure vs "optimal" then performance evaluation
 * Performance is affected when the max dimension of the double array is bigger than what is asked for.
 
+## Source Code V3: Things learned
+* How do you know that there is a cache miss? And what exactly is that?
+* The i-j-k loop is faster than the originally j-k-i construct
+* M_DIM: 1000 Time-of-Execution j-k-i: 2.99s i-j-k: 2.74s ------ M_DIM: 2000 Time-of-Execution j-k-i: 49.54s i-j-k: 38.83s
+* Thought: Online i've seen people mention cache misses depending on which loop is nested i vs j
+* Also "It is well known that j-k-i loop nest is optimal in this situation. " Needs personal investigating to determine current loop structure vs "optimal" then performance evaluation
+* Performance is affected when the max dimension of the double array is bigger than what is asked for.
+* 
 ### To do 10/23
 * Understand memory allocation strategies i.e. stack vs heap then discuss in readMe
-* Investigate j-k-i loop construct
-** DIM: 1000 OG:2.99s j-k-i: 2.74s ----------- DIM: 2000 OG:49.54s j-k-i: 38.83s
 * Create script to record dimension size vs time of execution
 
