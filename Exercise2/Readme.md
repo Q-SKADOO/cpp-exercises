@@ -33,9 +33,11 @@ Thoughts:
 * The size of the matrices are defined before main as well using a define directive: #define MAXDIM 1000
 * Thought: Online i've seen people mention cache misses depending on which loop is nested i vs j
 * Also "It is well known that j-k-i loop nest is optimal in this situation. " Needs personal investigating to determine current loop structure vs "optimal" then performance evaluation
+* Performance is affected when the max dimension of the double array is bigger than what is asked for.
 
 ### To do 10/23
 * Understand memory allocation strategies i.e. stack vs heap then discuss in readMe
 * Investigate j-k-i loop construct
+** DIM: 1000 OG:2.99s j-k-i: 2.74s ----------- DIM: 2000 OG:49.54s j-k-i: 38.83s
 * Create script to record dimension size vs time of execution
 
