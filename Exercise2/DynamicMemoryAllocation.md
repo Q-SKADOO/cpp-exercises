@@ -98,9 +98,11 @@ Dynamic memory allocation avoids these two issues.
 
 ## How to Put Elements Inside of The Array After Dynamic Memory Allocation
 for example:
+```cpp
 int *a = new int[n]
 a[0] = 10
 a[20] = 40
+```
 
 The pointer *a is stored on the stack and points to the first element of the array on the heap
 a[i] = *(a+i)
@@ -108,6 +110,7 @@ a[i] = *(a+i)
 These values get stored at the address on the heap
 
 ### Find The largest Element in Array
+```cpp
 int *a = new int[n]; //heap has 4 bytes per element. The pointer *a takes up 4 bytes on Stack
 for (int i = o; i<n; i++){
   cin>>a[i]; //user setting value of each element in array
@@ -122,19 +125,23 @@ for (int i = 0; i<n; i++){
 cout<<Largest<<endl;
 
 return 0;
+```
 
-
+```cpp
 main();
 if()
 { int i;
 }
+```
 
 This is static allocation. When the last bracket is reached aka the scope of i finishes and its memory gets deallocated.
 So i is present inside the stack then gets deleted automatically
 
 Dynamic Allocation this is not the case
+```cpp
 if()
 {int *i = new int i}
+```
 The *i does not have a scope. THis is heap or dynamic memory allocation so does not get deleted
 
 
@@ -144,28 +151,35 @@ Releases based on scope
 Dynamic
 No concept of scope. So have to manually release the memory.
 
-Example
-
+### Example
+```cpp
 while (true)
 {
 int i;
 }
+```
 
 In the static case, the 4 bytes are allocated on the stack then as we traverse through the loop the 4 bytes are deallocated then allocated again once we reach int i again. This repeats itself through the life of the loop. At max using 4 bytes of memory.
 
+```cpp
 while (true)
 {
 int *a = new int;
 }
+```
 
 In the dynamic case, the 8 bytes are allocated on the stack and 4 bytes are allocated on the heap. The 8 bytes of memory on the stack gets deallocated but Since the memory is not manually deallocated, this process continues where 4 bytes are allocated to heap each cycle of the loop. Memory usage increases and at some point the program will crash.
 
 ## Ways To Delete
 Single Element Deletion
-delete p;
 
+```cpp
+delete p;
+```
+
+```cpp
 Array Deletion
 delete []p;
-
+```
 
 
