@@ -42,3 +42,5 @@ p[i] = new int[20]; // Creates the arrays at each element of the interger pointe
 }
 
 This is how to create 2D array dynamically
+
+
