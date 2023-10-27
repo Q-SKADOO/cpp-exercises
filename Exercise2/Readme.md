@@ -43,11 +43,16 @@ Thoughts:
 * Also "It is well known that j-k-i loop nest is optimal in this situation. " Needs personal investigating to determine current loop structure vs "optimal" then performance evaluation
 * Performance is affected when the max dimension of the double array is bigger than what is asked for.
 
-## SOurce Code V4: Things learned
+## Source Code V4: Things learned
 * How to dynamically allocate memory
 * Differences between stack and heap
-* 
-### To do 10/23
-* Understand memory allocation strategies i.e. stack vs heap then discuss in readMe
+* The matrix multiplication is slower in this version (https://stackoverflow.com/questions/2264969/why-is-memory-allocation-on-heap-much-slower-than-on-stack)
+* The management of a stack only involves the instruction and registers (SP, BP), which is naturally/purely hardware in a sense.
+* While for a heap, it further involves complex software data structures and algorithms, which involves function calling (again stack involved), memory access, etc.
+* M_DIM: 2000 Time-of-Execution 81.5s vs 38.83s (V4 code)
+
+### To do 10/27
+* Figure out how to use math libraries when compiling code
+* Outfit code to run on gpu
 * Create script to record dimension size vs time of execution
 
