@@ -42,6 +42,10 @@ Thoughts:
 * Thought: Online i've seen people mention cache misses depending on which loop is nested i vs j
 * Also "It is well known that j-k-i loop nest is optimal in this situation. " Needs personal investigating to determine current loop structure vs "optimal" then performance evaluation
 * Performance is affected when the max dimension of the double array is bigger than what is asked for.
+
+## SOurce Code V4: Things learned
+* How to dynamically allocate memory
+* Differences between stack and heap
 * 
 ### To do 10/23
 * Understand memory allocation strategies i.e. stack vs heap then discuss in readMe
