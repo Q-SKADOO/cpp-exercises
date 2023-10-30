@@ -51,6 +51,14 @@ Thoughts:
 * While for a heap, it further involves complex software data structures and algorithms, which involves function calling (again stack involved), memory access, etc.
 * M_DIM: 2000 Time-of-Execution 81.5s vs 38.83s (V3 code)
 
+## Math Libraries: Things Learned
+* Used `module load blas` then at the `-lblas` flag in an attempt to implement blas. No changes to V4 code made. Not sure if this is correct or will work.
+* M-DIM: 2000 Time-of-Execution 81.5s vs 36.9 (V4 no-blas vs blas)
+* Used `module load lapack` then at the `-llapack` flag in an attempt to implement blas. No changes to V4 code made. Not sure if this is correct or will work.
+* M-DIM: 2000 Time-of-Execution 81.5s vs 36.5 (V4 no-lapack vs lapack)
+* Loaded both modules and their flags for compiling. No changes to V4 code made. Not sure if this is correct or will work.
+* M-DIM: 2000 Time-of-Execution 81.5s vs 37s (V4 no-libray vs blas/lapack)
+
 ### To do 10/27
 * Figure out how to use math libraries when compiling code
 * Outfit code to run on gpu
