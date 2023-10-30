@@ -49,7 +49,7 @@ Thoughts:
 * The matrix multiplication is slower in this version (https://stackoverflow.com/questions/2264969/why-is-memory-allocation-on-heap-much-slower-than-on-stack)
 * The management of a stack only involves the instruction and registers (SP, BP), which is naturally/purely hardware in a sense.
 * While for a heap, it further involves complex software data structures and algorithms, which involves function calling (again stack involved), memory access, etc.
-* M_DIM: 2000 Time-of-Execution 81.5s vs 38.83s (V4 code)
+* M_DIM: 2000 Time-of-Execution 81.5s vs 38.83s (V3 code)
 
 ### To do 10/27
 * Figure out how to use math libraries when compiling code
