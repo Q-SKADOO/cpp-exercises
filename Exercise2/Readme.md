@@ -38,7 +38,7 @@ Thoughts:
 ## Source Code V3: Things learned
 * How do you know that there is a cache miss? And what exactly is that?
 * The i-j-k loop is faster than the originally j-k-i construct
-* M_DIM: 1000 Time-of-Execution j-k-i: 2.99s i-j-k: 2.74s ------ M_DIM: 2000 Time-of-Execution j-k-i: 49.54s i-j-k: 38.83s
+* M_DIM: 1000 Time-of-Execution j-k-i: 3.22s i-j-k: 2.91s ------ M_DIM: 2000 Time-of-Execution j-k-i: 48.94s i-j-k: 41.05s
 * Thought: Online i've seen people mention cache misses depending on which loop is nested i vs j
 * Also "It is well known that j-k-i loop nest is optimal in this situation. " Needs personal investigating to determine current loop structure vs "optimal" then performance evaluation
 * Performance is affected when the max dimension of the double array is bigger than what is asked for.
@@ -49,18 +49,22 @@ Thoughts:
 * The matrix multiplication is slower in this version (https://stackoverflow.com/questions/2264969/why-is-memory-allocation-on-heap-much-slower-than-on-stack)
 * The management of a stack only involves the instruction and registers (SP, BP), which is naturally/purely hardware in a sense.
 * While for a heap, it further involves complex software data structures and algorithms, which involves function calling (again stack involved), memory access, etc.
-* M_DIM: 2000 Time-of-Execution 81.5s vs 38.83s (V3 code)
+* M_DIM: 2000 Time-of-Execution 81.5s vs 41.05s (V3 code)
 
 ## Math Libraries: Things Learned
+* Be sure that the CPU used is the same. saw increase in speed from 81.5s to 37s which if not realized would have been attributed to my attempt at calling math libraries.
 * Used `module load blas` then at the `-lblas` flag in an attempt to implement blas. No changes to V4 code made. Not sure if this is correct or will work.
-* M-DIM: 2000 Time-of-Execution 81.5s vs 36.9 (V4 no-blas vs blas)
+* M-DIM: 2000 Time-of-Execution 81.5s vs 82.47s (V4 no-blas vs blas)
 * Used `module load lapack` then at the `-llapack` flag in an attempt to implement blas. No changes to V4 code made. Not sure if this is correct or will work.
-* M-DIM: 2000 Time-of-Execution 81.5s vs 36.5 (V4 no-lapack vs lapack)
+* M-DIM: 2000 Time-of-Execution 81.5s vs 82.88 (V4 no-lapack vs lapack)
 * Loaded both modules and their flags for compiling. No changes to V4 code made. Not sure if this is correct or will work.
-* M-DIM: 2000 Time-of-Execution 81.5s vs 37s (V4 no-libray vs blas/lapack)
+* M-DIM: 2000 Time-of-Execution 81.5s vs 82.53 (V4 no-libray vs blas/lapack)
+* As of 10/30 this is a fail. How to implement math libraries???
+* Attempt #2: Adding cblas.h (#include </share/modules/blas/3.8.0-8/include/cblas/cblas.h>) to the .cpp file does nothing. 82.02s
 
 ### To do 10/27
 * Figure out how to use math libraries when compiling code
-* Outfit code to run on gpu
+* Be sure that timing is done consistently on the same CPU
+* Outfit code to run on gpu (Current attempt before reaching out to mentor for assistance with math libraries)
 * Create script to record dimension size vs time of execution
 
