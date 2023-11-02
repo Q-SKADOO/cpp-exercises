@@ -52,7 +52,7 @@ Thoughts:
 * M_DIM: 2000 Time-of-Execution 81.5s vs 41.05s (V3 code)
 * UPDATE: using i-k-j the new fastest time for V3 is 21.5s and for dynamic memory allocation 38.2s. Dynamic memory allocation is still slower than have the array on the stack or global
 
-## Math Libraries: Things Learned
+### V4 Math Libraries: Things Learned
 * Be sure that the CPU used is the same. saw increase in speed from 81.5s to 37s which if not realized would have been attributed to my attempt at calling math libraries.
 * Used `module load blas` then at the `-lblas` flag in an attempt to implement blas. No changes to V4 code made. Not sure if this is correct or will work.
 * M-DIM: 2000 Time-of-Execution 81.5s vs 82.47s (V4 no-blas vs blas)
@@ -62,7 +62,12 @@ Thoughts:
 * M-DIM: 2000 Time-of-Execution 81.5s vs 82.53 (V4 no-libray vs blas/lapack)
 * As of 10/30 this is a fail. How to implement math libraries???
 * Attempt #2: Adding cblas.h (#include </share/modules/blas/3.8.0-8/include/cblas/cblas.h>) to the .cpp file does nothing. 82.02s
-* 11/2/203: 
+* 11/2/203: `-lcblas` is needed when compiling. It is correct to include the cblas.h file. HOWEVER, one must use the `cblas_dgemm` function to actually call blas for the matrix matrix multiplication
+* NOW the code works. `SourceCode_V4_blasFail` A speed up is seen to where the Time-of-Execution is 6.27s.
+* Problem: After cblas_dgemm we are hit with different errors - `double free or corruption (!prev) / Aborted (core dumped)` or `free(): invalid pointer`
+* Solution: `SourceCode_V4_blasSuccess` cblas_dgemm takes the matrix as continuous memory aka 1D array so the code is outfitted to dynamically allocate space on the stack that points to memory on heap. Then create a 1D array that is of length: MxN for each matrix A, B, and C with C being empty . And we construct it as RowMajor. 5.5s
+* Also validated that the results are correct by testing on a 2x2 matrix
+
 
 ### To do 10/27
 * Figure out how to use math libraries when compiling code
