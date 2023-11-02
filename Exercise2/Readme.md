@@ -71,7 +71,7 @@ Thoughts:
 
 
 ### To do 11/2
-* Figure out how to use math libraries when compiling code
+* Figure out how to use rocm math libraries when compiling code such as rocblas
 * Outfit code to run on gpu 
 * Create script to record dimension size vs time of execution
 
