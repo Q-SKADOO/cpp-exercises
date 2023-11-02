@@ -65,7 +65,7 @@ Thoughts:
 * 11/2/203: `-lcblas` is needed when compiling. It is correct to include the cblas.h file. HOWEVER, one must use the `cblas_dgemm` function to actually call blas for the matrix matrix multiplication
 * NOW the code works. `SourceCode_V4_blasFail` A speed up is seen to where the Time-of-Execution is 6.27s.
 * Problem: After cblas_dgemm we are hit with different errors - `double free or corruption (!prev) / Aborted (core dumped)` or `free(): invalid pointer`
-* Solution: `SourceCode_V4_blasSuccess` cblas_dgemm takes the matrix as continuous memory aka 1D array so the code is outfitted to dynamically allocate space on the stack that points to memory on heap. Then create a 1D array that is of length: MxN for each matrix A, B, and C with C being empty . And we construct it as RowMajor.
+* Solution: `SourceCode_V4_blasSuccess` cblas_dgemm takes the matrix as continuous memory aka 1D array (Didnt see this in the "manual". Found out from a random comment on stackoverflow. so the code is outfitted to dynamically allocate space on the stack that points to memory on heap. Then create a 1D array that is of length: MxN for each matrix A, B, and C with C being empty . And we construct it as RowMajor.
 * Time-of-Execution: 5.5s
 * Also validated that the results are correct by testing on a 2x2 matrix
 
