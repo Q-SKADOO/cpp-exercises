@@ -86,14 +86,14 @@ int main()
 
     }
 
-
+    // we need MxN for each matrix
     t1 = r1 * c1;
     t2 = r2*c2;
     t3 = c1*r2;
 
 
-    double** matrixa = new double*[1];
-    matrixa[0] = new double[c1*r1];
+    double** matrixa = new double*[1]; // This time we want a 1D array. So create one pointer to memory on heap instead of a column of pointers
+    matrixa[0] = new double[c1*r1]; // This array has a length of MxN for the matrix. cblas_dgemm takes continuous memory
     for(int i=0; i<t1; i++){
 
                         double random = 0 + (rand() % 11);
