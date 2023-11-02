@@ -38,7 +38,7 @@ Thoughts:
 ## Source Code V3: Things learned
 * How do you know that there is a cache miss? And what exactly is that?
 * The i-j-k loop is faster than the originally j-k-i construct
-* M_DIM: 1000 Time-of-Execution j-k-i: 3.22s i-j-k: 2.91s ------ M_DIM: 2000 Time-of-Execution j-k-i: 48.94s i-j-k: 41.05s
+* M_DIM: 1000 Time-of-Execution j-k-i: 3.22s i-j-k: 2.91s ------ M_DIM: 2000 Time-of-Execution j-k-i: 48.94s i-j-k: 41.05s i-k-j: 21.5s j-i-k: 24.08 k-i-j: 22.17s k-j-i: 48.5s
 * Thought: Online i've seen people mention cache misses depending on which loop is nested i vs j
 * Also "It is well known that j-k-i loop nest is optimal in this situation. " Needs personal investigating to determine current loop structure vs "optimal" then performance evaluation
 * Performance is affected when the max dimension of the double array is bigger than what is asked for.
@@ -50,6 +50,7 @@ Thoughts:
 * The management of a stack only involves the instruction and registers (SP, BP), which is naturally/purely hardware in a sense.
 * While for a heap, it further involves complex software data structures and algorithms, which involves function calling (again stack involved), memory access, etc.
 * M_DIM: 2000 Time-of-Execution 81.5s vs 41.05s (V3 code)
+* UPDATE: using i-k-j the new fastest time for V3 is 21.5s and for dynamic memory allocation 38.2s. Dynamic memory allocation is still slower than have the array on the stack or global
 
 ## Math Libraries: Things Learned
 * Be sure that the CPU used is the same. saw increase in speed from 81.5s to 37s which if not realized would have been attributed to my attempt at calling math libraries.
@@ -61,6 +62,7 @@ Thoughts:
 * M-DIM: 2000 Time-of-Execution 81.5s vs 82.53 (V4 no-libray vs blas/lapack)
 * As of 10/30 this is a fail. How to implement math libraries???
 * Attempt #2: Adding cblas.h (#include </share/modules/blas/3.8.0-8/include/cblas/cblas.h>) to the .cpp file does nothing. 82.02s
+* 11/2/203: 
 
 ### To do 10/27
 * Figure out how to use math libraries when compiling code
