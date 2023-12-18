@@ -1,6 +1,7 @@
 ```cpp
 #include <iostream>
 #include <bits/stdc++.h>
+#include <cstdlib>
 #include </opt/rocm-5.7.0/include/rocblas/rocblas.h>
 //#include <rocblas/rocblas.h>
 #include </opt/rocm-5.7.0/include/hip/hip_runtime.h>
@@ -98,7 +99,7 @@ int main()
 
 
     double** matrixa = new double*[1];
-    matrixa[0] = new double[c1*r1];
+    matrixa[0] = new double[t1];
     for(int i=0; i<t1; i++){
 
                         double random = 0 + (rand() % 11);
@@ -110,7 +111,7 @@ int main()
 
 
     double** matrixb = new double*[1];
-    matrixb[0] = new double[r2*c2];
+    matrixb[0] = new double[t2];
     for(int i=0; i<t2; i++){
 
 
@@ -122,15 +123,21 @@ int main()
                 }
 
 
-    double** matrixc = new double*[1];
-    matrixc[0] = new double[t3];
-
+    double* d_matrixa, *d_matrixb, *d_matrixc;
 
 
 
     // Matrix Multiplication
     //cout << "\nMultiplication of given two matrices is:\n";
 
+ // Allocate memory on the GPU
+    hipMalloc(&d_matrixa, t1 * sizeof(double));
+    hipMalloc(&d_matrixb, t2 * sizeof(double));
+    hipMalloc(&d_matrixc, t3 * sizeof(double));
+
+    // Copy data from CPU to GPU
+    hipMemcpy(d_matrixa, h_matrixa, t1 * sizeof(double), hipMemcpyHostToDevice);
+    hipMemcpy(d_matrixb, h_matrixb, t2 * sizeof(double), hipMemcpyHostToDevice);
 
 
    //rocblas manual
@@ -170,7 +177,13 @@ int main()
    cout << matrixc[0][i] << "\t";
    } */
 
+    // Copy the result back from GPU to CPU
+    hipMemcpy(h_matrixc, d_matrixc, t3 * sizeof(double), hipMemcpyDeviceToHost);
 
+    // Free GPU memory and destroy ROCBLAS handle
+    hipFree(d_matrixa);
+    hipFree(d_matrixb);
+    hipFree(d_matrixc);
    rocblas_destroy_handle(test_handle);
 
    //Learned that you have to manually deallocate memory when using dynamic memory allocation
