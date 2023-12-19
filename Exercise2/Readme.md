@@ -69,7 +69,16 @@ Thoughts:
 * Time-of-Execution: 5.5s
 * Also validated that the results are correct by testing on a 2x2 matrix
 
-
+### V4 Math Libraries: Things Learned
+* Make sure to have HIP framework installed and include the HIP Header
+  ```cpp
+  #include <hip/hip_runtime.h>
+  ```
+* Allocate Memory on the GPU using hipMalloc. So create gpu versions of the matrices and create a size for them.
+```cpp
+float* d_matrixA;
+size_t matrixSize = numRows * numCols * sizeof(float);
+```
 ### To do 11/2
 * Figure out how to use rocm math libraries when compiling code such as rocblas
 * Outfit code to run on gpu
