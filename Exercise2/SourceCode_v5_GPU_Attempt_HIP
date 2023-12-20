@@ -1,8 +1,8 @@
 ```cpp
 #include <iostream>
-//Neesary HIP Header
+//Necessary HIP Header
 #include <hip/hip_runtime.h>
-
+#include </share/modules/blas/3.8.0-8/include/cblas/cblas.h>
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -60,6 +60,20 @@ std::vector<double> matrixC(long m, long n)
 }
 */
 
+
+    __global__ void matrixMultiplication(long* A, long* B, long* C, int r1, int c1, int r2) {
+        int i = blockIdx.x * blockDim.x + threadIdx.x;
+        int j = blockIdx.y * blockDim.y + threadIdx.y;
+
+        if (i < r1 && j < c1) {
+                C[i * c1 + j] = 0;
+                for (int k = 0; k < r2; k++) {
+                        C[i * c1 + j] += A[i * r2 + k] * B[k * c1 + j];
+          }
+       }
+     }
+
+
 int main()
 {
     long r1, c1, r2, c2;
@@ -88,12 +102,15 @@ int main()
     }
 
     //Allocate Memory of Matrices for GPU
-    long* d_matrixa, *d_matrixb, *d_matrixc;
+    long* d_matrixa, *d_matrixb, *d_matrixc, *d_r1, *d_c1, *d_r2;
     size_t matrixSize = r1 * c1 * sizeof(long);
 
     hipMalloc(&d_matrixa, matrixSize);
     hipMalloc(&d_matrixb, matrixSize);
     hipMalloc(&d_matrixc, matrixSize);
+    hipMalloc(&d_r1, sizeof(long));
+    hipMalloc(&d_c1, sizeof(long));
+    hipMalloc(&d_r2, sizeof(long));
 
     long** matrixa = new long*[r1];
     for(long i=0; i<r1; i++){
@@ -132,6 +149,9 @@ int main()
     //Copy Data from Host to Device
     hipMemcpy(d_matrixa, matrixa[0], matrixSize, hipMemcpyHostToDevice);
     hipMemcpy(d_matrixb, matrixb[0], matrixSize, hipMemcpyHostToDevice);
+    hipMemcpy(d_r1, &r1, sizeof(long),hipMemcpyHostToDevice);
+    hipMemcpy(d_c1, &c1, sizeof(long),hipMemcpyHostToDevice);
+    hipMemcpy(d_r2, &r2, sizeof(long),hipMemcpyHostToDevice);
 
     // Matrix Multiplication
     //cout << "\nMultiplication of given two matrices is:\n";
@@ -141,17 +161,7 @@ int main()
 
     //Define and launch a HIP kernel for matrix multiplication: Replace CPU matrix multiplication loop with a HIP kernel
     clock_t begin1 = clock();
-    __global__ void matrixMultiplication(long* A, long* B, long* C, int r1, int c1, int r2) {
-    int i = blockIdx.x * blockDim.x + threadIdx.x;
-    int j = blockIdx.y * blockDim.y + threadIdx.y;
 
-    if (i < r1 && j < c1) {
-        C[i * c1 + j] = 0;
-        for (int k = 0; k < r2; k++) {
-            C[i * c1 + j] += A[i * r2 + k] * B[k * c1 + j];
-          }
-       }
-     }
 
     dim3 blockDim(16, 16);  // You can adjust the block size for performance
     dim3 gridDim((r1 + blockDim.x - 1) / blockDim.x, (c1 + blockDim.y - 1) / blockDim.y);
@@ -167,7 +177,7 @@ int main()
     /*
     for (long i = 0; i < r1; i++) {
             for (long j = 0; j < c2; j++) {
-                    cout << matrix_c[i][j] << "\t";
+                    cout << matrixc[i][j] << "\t";
             }
     }
     */
@@ -176,7 +186,9 @@ int main()
     hipFree(d_matrixa);
     hipFree(d_matrixb);
     hipFree(d_matrixc);
-
+    hipFree(d_r1);
+    hipFree(d_c1);
+    hipFree(d_r2);
     //Learned that you have to manually deallocate memory when using dynamic memory allocation
     for(long i=0;i<r1;i++){
             delete []matrixa[i];
