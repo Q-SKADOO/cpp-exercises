@@ -191,14 +191,14 @@ int main()
     hipFree(d_r2);
     //Learned that you have to manually deallocate memory when using dynamic memory allocation
     for(long i=0;i<r1;i++){
-            delete []matrixa[i];
-            delete []matrixb[i];
-            delete []matrixc[i];
+            delete[] matrixa[i];
+            delete[] matrixb[i];
+            delete[] matrixc[i];
     }
 
-    delete []matrixa;
-    delete []matrixb;
-    delete []matrixc;
+    delete[] matrixa;
+    delete[] matrixb;
+    delete[] matrixc;
 
     return 0;
 
