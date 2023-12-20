@@ -174,13 +174,13 @@ int main()
     double time_taken = (double)(end1 - begin1) / CLOCKS_PER_SEC;
     printf("\n \nfunction took %f seconds to execute \n", time_taken);
 
-    /*
+    
     for (long i = 0; i < r1; i++) {
             for (long j = 0; j < c2; j++) {
                     cout << matrixc[i][j] << "\t";
             }
     }
-    */
+    
 
     //Free Memory on Device and Host
     hipFree(d_matrixa);
